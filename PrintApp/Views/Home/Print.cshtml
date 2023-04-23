@@ -1,0 +1,155 @@
+﻿<!--`Print Page-->
+@{
+    Layout = "";
+    
+    }
+
+@model IEnumerable<PrintApp.Models.PackingListModel>
+
+
+<html>
+<top>
+ 
+    </br>
+<h4>@ViewBag.TextTime</h4>
+<h3><u> Packing List 1</u></h3>
+ 
+
+    <style>
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+
+</style>
+
+<div class="content" id="content2">
+   
+   
+<style type="text/css">
+        * {
+        
+         -webkit-margin-start: exact !important;
+        -webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
+        color-adjust: exact !important;                 /* Firefox 48 – 96 */
+        print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+        }
+
+
+        table {
+            
+            border: 1px solid #000;
+            }
+		th,
+		td {
+			padding: 4px 4px 4px 4px ;
+			text-align: center ;
+			}
+
+		td{
+            
+			border-top: 1px solid black;
+            padding: 0 15px;
+            
+			}
+        table td + td { border-left:1px solid black; }
+
+	</style>
+</top>
+<body>
+<table class="table">
+    
+    <thead>
+        <tr style="background-color:black; color:white" >
+            <th>
+                <!-- <input type="text" hidden name="orv" value="model.PaletNO"/> -->
+                @Html.DisplayNameFor(model => model.Palet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriereMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantitate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+             <tr>     
+            @if(@item.Palet != ""){
+             <td>
+                 @Html.DisplayFor(modelItem => item.Palet)
+                 
+            </td> 
+            }
+            else{
+                <td id="liber" style="border-top: hidden" >
+                 @Html.DisplayFor(modelItem => item.Palet)
+                 
+            </td> 
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Colet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriereMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantitate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
+
+
+<script>
+    
+    //Need to make sure Footer/Header are not selected in the Print options
+    function PrintOnlyTable() {
+        
+        //var HTML = $("html");
+        //var cln = document.documentElement.innerHTML;
+        //HTML.html($("table"));
+        window.focus();
+        window.print();
+        //document.docElumentement.innerHTML = cln;
+        return false;
+    }
+     
+    //Alternative for print to make footer/header disapear. Works for Chrome only.
+    function PrintElem()
+    {
+    var mywindow = window.open('', 'PRINT');
+
+    mywindow.document.write('</br><html style="max-width: 500px; margin: auto;"><head><h3><u>' + "Packing List 1"  + '</u></h3>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById('content2').innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+    }
+    
+    setTimeout(PrintElem, 1000);
+   
+</script>
+

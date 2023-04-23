@@ -1,0 +1,18 @@
+﻿<!--Home Page-->
+
+@model IEnumerable<PrintApp.Models.PackingListModel>
+@{
+}
+
+
+@foreach(var c in User.Claims)
+{
+    <li>Connected as : @c.Value</li>
+}
+
+<div class="col d-flex justify-content-center">
+                    <input type="button" value="Packing List 1" onclick="@("window.location.href='" + @Url.Action("ViewList", "Home") + "'");" />
+</div>
+
+
+

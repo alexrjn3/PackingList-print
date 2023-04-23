@@ -1,0 +1,113 @@
+﻿<!--View List Page-->
+@model IEnumerable<PrintApp.Models.PackingListModel>
+
+
+<html>
+<top>
+ 
+    </br>
+<h3> Packing List 1: </h3>
+    <style>
+.content {
+ 
+}
+
+</style>
+
+<div class="content">
+
+
+   
+   
+<style type="text/css">
+        table {
+            
+            
+            }
+		th,
+		td {
+			
+			
+			}
+
+		td{
+            
+			border-top: 1px solid black;
+            
+            
+			}
+        table td + td { border-left:1px solid black; }
+        form {
+        text-align: right;
+    }
+
+	</style>
+    <div class>
+    <form asp-controller="Home" asp-action="Print" method="post">
+			
+				<input type="text" hidden name="pal" value="@ViewBag.TextPAL"/>
+                <input type="submit" value="Print"></input>
+	</form>
+                  </br>  
+    </div>
+</top>
+<body>
+<table class="table">
+    
+    <thead>
+        <tr style="background-color:black; color:white;" >
+            <th>
+                <!-- <input type="text" hidden name="orv" value="model.PaletNO"/> -->
+                @Html.DisplayNameFor(model => model.Palet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriereMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantitate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+             <tr>     
+            @if(@item.Palet != ""){
+             <td>
+                 @Html.DisplayFor(modelItem => item.Palet)
+                 
+            </td> 
+            }
+            else{
+                <td id="liber" style="border-top: hidden" >
+                 @Html.DisplayFor(modelItem => item.Palet)
+                 
+            </td> 
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Colet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriereMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantitate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
